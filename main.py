@@ -7,3 +7,5 @@
 # TODO #4: Check if resources are sufficient.
 
 # TODO #5: Process coins.
+
+# TODO #6:
