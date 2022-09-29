@@ -1,8 +1,14 @@
 # TODO #1: prompt user by asking "What would you like? espresso/latte/cappuccino"
-#   Use user's input to decide next st ep.
+#   Use user's input to decide next step.
 #   Prompt should show again after each completed action to serve next customer.
-
+coffee = input("What would you like? Type 'espresso', 'latte', or 'cappuccino'.: ").lower()
+machine_on = True
 # TODO #2: Have a way to turn "off" coffee machine; should end code with execution.
+while machine_on:
+    if coffee == "off"
+        machine_on == False
+    elif coffee == "report"
+        #print report
 
 # TODO #3: have Report prompt that shows current resources.
 #   Water: ___ml
@@ -26,4 +32,3 @@
 #   Deduct resources from machine resources.
 #   Tell user "Here is your___. Enjoy!"
 
-#Test push #3.
