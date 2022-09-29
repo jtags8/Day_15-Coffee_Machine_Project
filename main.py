@@ -1,9 +1,5 @@
 from menu import MENU, resources
 
-def ingredient_check(choice, w, m, c):
-    ###Checks if there are enough resources in the machine###
-    if choice < w or choice < m or choice < c:
-        return ("Not enough resources.")
 def coin_insert():
     p = float(input("How many pennies will you insert?: "))
     n = float(input("How many nickels will you insert?: "))
@@ -12,42 +8,49 @@ def coin_insert():
     total_cash = ((p*.01)+(n * .05)+(d * .1)+(q * .25))
     return total_cash
 
-# TODO #1: Prompt should show again after each completed action to serve next customer.
-machine_on = True
-water = resources["water"]
-milk = resources["milk"]
-coffee = resources["coffee"]
-money = 0
-while machine_on:
-    user_choice = input("What would you like? Type 'espresso', 'latte', or 'cappuccino'.: ").lower()
-    if user_choice == "off":
-        print("The coffee machine has been turned off.")
-        machine_on == False
-    elif user_choice == "report":
-        print(f"Water: {water}ml\nMilk: {milk}\nCoffee: {coffee}\nMoney: ${money}")
-    # else:
-    #     if water < MENU[user_choice][""]
+def coffee_machine():
+    machine_on = True
+    water = resources["water"]
+    milk = resources["milk"]
+    coffee = resources["coffee"]
+    money = 0
+    while machine_on:
+        user_choice = input("What would you like? Type 'espresso', 'latte', or 'cappuccino'.: ").lower()
 
-# TODO #4: Check if resources are sufficient.
-#   IF not enough, do not make drink, instead print "Sorry there is not enough ___."
+        if user_choice == "off":
+            print("The coffee machine has been turned off.")
+            machine_on == False
 
-# TODO #5: Process coins.
-#   Need to calculate monetary value of coins inserted.
-#   Prompt user to input coins used.
-# TODO #6: Need to check if transaction is successful
-#   Enough money entered? If not, should say "Sorry, not enough money. Money refunded."
-#   Else, cost of drink gets added to machine as profit and reflect in report.
-#   If too much money, need to give change. "Here is ___ in change." rounded to 2 decimals.
-    user_amount = coin_insert()
-    if user_amount < MENU[user_choice]["cost"]:
-        print("Sorry, not enough money. Money has been refunded.")
-    elif user_amount > MENU[user_choice]["cost"]
-    else:
+        elif user_choice == "report":
+            print(f"Water: {water}ml\nMilk: {milk}\nCoffee: {coffee}\nMoney: ${money}")
+
+        else:
+            if water < MENU[user_choice]["ingredients"]["water"]:
+                print("Sorry there is not enough water.")
+            elif milk < MENU[user_choice]["ingredients"]["milk"]:
+                print("Sorry there is not enough milk.")
+            elif coffee < MENU[user_choice]["ingredients"]["coffee"]:
+                print("Sorry there is not enough coffee.")
+            else:
+                user_amount = coin_insert()
+                if user_amount < MENU[user_choice]["cost"]:
+                    print("Sorry, not enough money. Money has been refunded.")
+                elif user_amount > MENU[user_choice]["cost"]:
+                    change = user_amount - MENU[user_choice]["cost"]
+                    format_change = "{:.2f}".format(change)
+                    print(f"Here is ${format_change} in change.")
+                    water -= MENU[user_choice]["ingredients"]["water"]
+                    milk -= MENU[user_choice]["ingredients"]["milk"]
+                    coffee -= MENU[user_choice]["ingredients"]["coffee"]
+                    money += MENU[user_choice]["cost"]
+                    print(f"And your {user_choice} is ready. Enjoy!")
+                else:
+                    water -= MENU[user_choice]["ingredients"]["water"]
+                    milk -= MENU[user_choice]["ingredients"]["milk"]
+                    coffee -= MENU[user_choice]["ingredients"]["coffee"]
+                    money += MENU[user_choice]["cost"]
+                    print(f"Here is your {user_choice}. Enjoy!")
 
 
 
-
-# TODO #7: Make coffee.
-#   Deduct resources from machine resources.
-#   Tell user "Here is your___. Enjoy!"
-
+coffee_machine()
